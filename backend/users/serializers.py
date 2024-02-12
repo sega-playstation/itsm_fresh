@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
 from .models import Course, Role, PasswordResetToken
-from enum import Enum 
+from enum import Enum
 class EnumField(serializers.Field):
     def to_representation(self, obj):
         if isinstance(obj, Enum):
@@ -17,7 +17,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
-        fields = ['id', 'roleId', 'name'] 
+        fields = ['id', 'roleId', 'name']
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     role_id = serializers.IntegerField()
@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = [ 'id', 'email', 'password', 'first_name', 'last_name', 'role_id', 'role_name', 'courseId', 'course_details', 'is_active', 'is_staff', 'date_joined' ]
-    
+
     def get_course_details(self, user):
         course_ids = user.courseId
         if course_ids:
@@ -44,15 +44,15 @@ class UserSerializer(serializers.ModelSerializer):
             except Course.DoesNotExist:
                 raise serializers.ValidationError(f"Course with id {course_id} does not exist.")
         return value
-    
+
     def create(self, validated_data):
         requesting_user = self.context['request'].user
-        
+
         if requesting_user.is_staff:
             role_id = validated_data.get('role_id', None)
         else:
             role_id = 4 # default role_id > Admin would control it
-        
+
         if 'courseId' in validated_data:
             courseId_data = self.validate_courseId(validated_data['courseId'])
         else:
@@ -76,7 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.is_staff = role_id == 1
         user.courseId = courseId_data
         user.set_password(validated_data['password'])
-        
+
         user.is_active = True if requesting_user.is_staff else False
 
         user.save()
@@ -84,12 +84,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         requesting_user =  self.context['request'].user
-        
+
         if requesting_user.is_staff:
             pass
         else:
             raise serializers.ValidationError("You are unauthorized to perform this action.")
-        
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
@@ -101,25 +101,25 @@ class UserSerializer(serializers.ModelSerializer):
                     instance.is_staff = value == 1
                 else:
                     raise serializers.ValidationError("Unauthorized for setting role_id data.")
-                
+
         if 'is_staff' in  validated_data:
             if requesting_user.is_staff:
                 is_staff_data = validated_data['is_staff']
                 instance.is_staff = is_staff_data
             else:
                 raise serializers.ValidationError("Unauthorized for setting is_staff data.")
-                    
+
         if 'courseId' in validated_data:
             if requesting_user.is_staff:
                 pass
             else:
                 raise serializers.ValidationError("Unauthorized for setting courseId data.")
-            
+
             role_id = instance.role_id
             courseId_data = validated_data['courseId']
             courseId_data = self.validate_courseId(validated_data['courseId'])
 
-            
+
             if role_id == 1:
                 instance.courseId = []
             elif role_id in [3, 4]: # 3 => instructor, 4 => student
@@ -135,7 +135,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-    
+
 class UserListSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     role_name = serializers.ReadOnlyField(source="role.name")
@@ -143,7 +143,7 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = [ 'id','email', 'password', 'first_name', 'last_name', 'role_id', 'role_name','courseId', 'course_details']
-        
+
     def get_course_details(self, user):
         course_ids = user.courseId
         if course_ids:
@@ -154,11 +154,11 @@ class UserListSerializer(serializers.ModelSerializer):
             return []
 
 class PasswordResetRequestSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField()  
+    email = serializers.EmailField()
     class Meta:
         model = PasswordResetToken
         fields = ['email']
-        
+
 class PasswordResetSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     resetId= serializers.UUIDField()
@@ -169,7 +169,7 @@ class PasswordResetSerializer(serializers.ModelSerializer):
 class DetailedTokenPairSerializer(TokenObtainPairSerializer):
     def get_token(self, user):
         token = super().get_token(user)
-        
+
         token['sub'] = {
             'email': user.email,
             'firstName': user.first_name,
@@ -179,7 +179,7 @@ class DetailedTokenPairSerializer(TokenObtainPairSerializer):
             'roleId': user.role_id,
             'courseId': [str(course) for course in user.courseId] if user.role_id != 1 else []
         }
-        
+
         return token
 
 class EmailSerializer(serializers.ModelSerializer):

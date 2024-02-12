@@ -10,7 +10,7 @@ from django.conf import settings
 
 # Create your models here.
 
-
+# remove sec group?
 class SecurityGroup(models.Model):
     securityGroupId = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,13 +27,13 @@ class Terms(ChoiceEnum):
     FA = "Fall"
     WI = "Winter"
     SP = "Spring"
-    
+
 class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=100)  
-    term = EnumChoiceField(enum_class=Terms, max_length=10)  
-    year = models.PositiveIntegerField(null=True)  
-    section = models.PositiveIntegerField()  
+    name = models.CharField(max_length=100)
+    term = EnumChoiceField(enum_class=Terms, max_length=10)
+    year = models.PositiveIntegerField(null=True)
+    section = models.PositiveIntegerField()
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -58,11 +58,11 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
-    def __str__(self): 
+    def __str__(self):
         return self.email
-    
+
     objects = UserManager()
-    
+
 # Model for adding and removing sections for an instructor
 class Instructor_sections(models.Model):
     instructor_section_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -74,7 +74,7 @@ class User_security_groups(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.ForeignKey(User, related_name='user_id', null=True, on_delete=models.SET_NULL)
     securitygroup_id = models.ForeignKey(SecurityGroup, related_name='securitygroup_id', null=True, on_delete=models.SET_NULL)
-    
+
 # Model for resetting password of any user
 class PasswordResetToken(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
