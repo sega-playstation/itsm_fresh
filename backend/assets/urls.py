@@ -14,4 +14,8 @@ urlpatterns = [
     path("api/", include(router.urls)),
 ]
 
+<<<<<<< HEAD
 urlpatterns += router.urls
+=======
+# urlpatterns += router.urls
+>>>>>>> fde268c9814b79f49d05defa63c74f96c858c11b

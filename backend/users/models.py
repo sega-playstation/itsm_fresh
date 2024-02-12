@@ -10,7 +10,11 @@ from django.conf import settings
 
 # Create your models here.
 
+<<<<<<< HEAD
 
+=======
+# remove sec group?
+>>>>>>> fde268c9814b79f49d05defa63c74f96c858c11b
 class SecurityGroup(models.Model):
     securityGroupId = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,6 +31,7 @@ class Terms(ChoiceEnum):
     FA = "Fall"
     WI = "Winter"
     SP = "Spring"
+<<<<<<< HEAD
     
 class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
@@ -34,6 +39,15 @@ class Course(models.Model):
     term = EnumChoiceField(enum_class=Terms, max_length=10)  
     year = models.PositiveIntegerField(null=True)  
     section = models.PositiveIntegerField()  
+=======
+
+class Course(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    name = models.CharField(max_length=100)
+    term = EnumChoiceField(enum_class=Terms, max_length=10)
+    year = models.PositiveIntegerField(null=True)
+    section = models.PositiveIntegerField()
+>>>>>>> fde268c9814b79f49d05defa63c74f96c858c11b
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -58,11 +72,19 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
+<<<<<<< HEAD
     def __str__(self): 
         return self.email
     
     objects = UserManager()
     
+=======
+    def __str__(self):
+        return self.email
+
+    objects = UserManager()
+
+>>>>>>> fde268c9814b79f49d05defa63c74f96c858c11b
 # Model for adding and removing sections for an instructor
 class Instructor_sections(models.Model):
     instructor_section_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -74,7 +96,11 @@ class User_security_groups(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_id = models.ForeignKey(User, related_name='user_id', null=True, on_delete=models.SET_NULL)
     securitygroup_id = models.ForeignKey(SecurityGroup, related_name='securitygroup_id', null=True, on_delete=models.SET_NULL)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fde268c9814b79f49d05defa63c74f96c858c11b
 # Model for resetting password of any user
 class PasswordResetToken(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
