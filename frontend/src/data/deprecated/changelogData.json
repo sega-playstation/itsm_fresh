@@ -1,0 +1,7 @@
+{
+  "date": "December 05 2023",
+  "title": "This Application Has Been Updated!",
+  "text": "In the new update to the itsm-ace ITSM tool, we have added the following changes:",
+  "changelog-list-items": ["New Update will be added soon", "and more"],
+  "note": "Note: When applications like ours update, leftover data may reside on users' machines that is no longer used. If you're experiencing any issues, please try <a href=\"https://www.pcmag.com/how-to/how-to-clear-your-cache-on-any-browser\">clearing your browser cache</a> or updating it for this site (CTRL + F5 on Windows and Command + R on Apple)."
+}

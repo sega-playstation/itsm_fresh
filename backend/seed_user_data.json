@@ -1,0 +1,120 @@
+[
+  {
+    "model": "users.role",
+    "fields": {
+      "roleId": 1,
+      "name": "Admin"
+    }
+  },
+  {
+    "model": "users.role",
+    "fields": {
+      "roleId": 3,
+      "name": "Instructor"
+    }
+  },
+  {
+    "model": "users.role",
+    "fields": {
+      "roleId": 4,
+      "name": "Student"
+    }
+  },
+  {
+    "model": "users.course",
+    "pk": "5d909ba5-033d-4e07-832b-2b7f5f20d2cf",
+    "fields": {
+      "name": "Course 1",
+      "term": "FA",
+      "year": 2023,
+      "section": 101102
+    }
+  },
+  {
+    "model": "users.course",
+    "pk": "4c6d4eb7-3a59-4d95-ba47-f72f8186b99d",
+    "fields": {
+      "name": "Course 2",
+      "term": "WI",
+      "year": 2023,
+      "section": 102103
+    }
+  },
+  {
+    "model": "users.course",
+    "pk": "607a0305-cbf5-4778-ba36-1f8c3d451b66",
+    "fields": {
+      "name": "Course 3",
+      "term": "SP",
+      "year": 2023,
+      "section": 103104
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
+      "email": "admin@itsm-ace.ca",
+      "first_name": "Admin",
+      "last_name": "User",
+      "password": "pbkdf2_sha256$320000$MuoNNBeksT9GuvM58DLUqt$Mt4mdxEYluDaXTdDthx2VCNEL4CEh9SpadJ3J/A7D74=",
+      "role": 1,
+      "is_active": true,
+      "is_staff": true
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
+      "email": "teacher@itsm-ace.ca",
+      "first_name": "new",
+      "last_name": "user1",
+      "password": "pbkdf2_sha256$320000$ov8sCOVJk0Ilw734zCtl9g$+6CZhw2tIPxL7iafNSOMldiYAhrOc2vMMa85tQuU+Bg=",
+      "role_id": 3,
+      "courseId": ["4c6d4eb7-3a59-4d95-ba47-f72f8186b99d"],
+      "is_active": true,
+      "is_staff": false
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
+      "email": "teacher2@itsm-ace.ca",
+      "first_name": "new",
+      "last_name": "user2",
+      "password": "pbkdf2_sha256$320000$ov8sCOVJk0Ilw734zCtl9g$+6CZhw2tIPxL7iafNSOMldiYAhrOc2vMMa85tQuU+Bg=",
+      "role_id": 3,
+      "courseId": [
+        "4c6d4eb7-3a59-4d95-ba47-f72f8186b99d",
+        "5d909ba5-033d-4e07-832b-2b7f5f20d2cf"
+      ],
+      "is_active": true,
+      "is_staff": false
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
+      "email": "student@itsm-ace.ca",
+      "first_name": "new",
+      "last_name": "user3",
+      "password": "pbkdf2_sha256$320000$BiSRtzvGZrpUIK1hc0V1QZ$bznouHtZLJcjdXfDyBpPmk4XDg1Ec8D1XBCQ13y2zTk=",
+      "role_id": 4,
+      "courseId": ["4c6d4eb7-3a59-4d95-ba47-f72f8186b99d"],
+      "is_active": true,
+      "is_staff": false
+    }
+  },
+  {
+    "model": "users.user",
+    "fields": {
+      "email": "student2@itsm-ace.ca",
+      "first_name": "new",
+      "last_name": "user4",
+      "password": "pbkdf2_sha256$320000$BiSRtzvGZrpUIK1hc0V1QZ$bznouHtZLJcjdXfDyBpPmk4XDg1Ec8D1XBCQ13y2zTk=",
+      "role_id": 4,
+      "courseId": ["5d909ba5-033d-4e07-832b-2b7f5f20d2cf"],
+      "is_active": true,
+      "is_staff": false
+    }
+  }
+]

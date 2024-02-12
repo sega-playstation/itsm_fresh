@@ -1,0 +1,8 @@
+[
+  { "key": 1, "value": "None", "label": "None" },
+  { "key": 2, "value": "Standard", "label": "Standard" },
+  { "key": 3, "value": "Normal", "label": "Normal" },
+  { "key": 4, "value": "Major", "label": "Major" },
+  { "key": 5, "value": "Emergency", "label": "Emergency" },
+  { "key": 6, "value": "Latent", "label": "Latent" }
+]

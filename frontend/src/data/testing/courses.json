@@ -1,0 +1,72 @@
+[
+  {
+    "id": "30717eb3-2bfd-48e3-a767-6d498e9ae220",
+    "name": "IT Ops",
+    "term": "FA",
+    "year": 2023,
+    "section": 345678
+  },
+  {
+    "id": "6c65b0fb-f913-4bd0-ad14-8ef6b41c5ff4",
+    "name": "IT Ops",
+    "term": "FA",
+    "year": 2023,
+    "section": 456789
+  },
+  {
+    "id": "71db4d90-30bb-4925-97e4-69890455131b",
+    "name": "IT Ops",
+    "term": "FA",
+    "year": 2023,
+    "section": 654321
+  },
+  {
+    "id": "9b656fad-d6ac-44db-9522-ed258a0bccd1",
+    "name": "AD&D",
+    "term": "FA",
+    "year": 2023,
+    "section": 765432
+  },
+  {
+    "id": "a92b8898-1658-451f-ad71-15326a4054f8",
+    "name": "AD&D",
+    "term": "FA",
+    "year": 2023,
+    "section": 987654
+  },
+  {
+    "id": "b27442bb-e647-42e6-aae1-6bfd6a511378",
+    "name": "AD&D",
+    "term": "FA",
+    "year": 2023,
+    "section": 567432
+  },
+  {
+    "id": "cc2d918e-c452-4a86-a292-ead6eb3f51da",
+    "name": "AD&D",
+    "term": "FA",
+    "year": 2023,
+    "section": 234789
+  },
+  {
+    "id": "e0d6243e-98e5-49e9-a15e-59abaacf23b6",
+    "name": "AD&D",
+    "term": "FA",
+    "year": 2023,
+    "section": 198432
+  },
+  {
+    "id": "17694925-f87d-475f-85e9-b8b4e8ec6d95",
+    "name": "IT Ops",
+    "term": "FA",
+    "year": 2024,
+    "section": 123456
+  },
+  {
+    "id": "2dd5b220-376f-4a92-bf29-44bb2e08739a",
+    "name": "IT Ops",
+    "term": "FA",
+    "year": 2023,
+    "section": 234567
+  }
+]
