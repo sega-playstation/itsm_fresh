@@ -1,0 +1,267 @@
+[
+  {
+    "Documentation of Configuration": [
+      {
+        "key": 1,
+        "value": "Incomplete and out of date",
+        "label": "Incomplete and out of date",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Less than 50%",
+        "label": "Less than 50%",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "More than 50%",
+        "label": "More than 50%",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Complete and up to date",
+        "label": "Complete and up to date",
+        "weight": 4
+      }
+    ],
+    "Environment": [
+      {
+        "key": 1,
+        "value": "Information Only",
+        "label": "Information Only",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Test Environment",
+        "label": "Test Environment",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Production - No Dependencies",
+        "label": "Production - No Dependencies",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Production - Multiple Dependencies",
+        "label": "Production - Multiple Dependencies",
+        "weight": 4
+      }
+    ],
+    "Redundancy": [
+      {
+        "key": 1,
+        "value": "None Available (Individual Point of Failure)",
+        "label": "None Available (Individual Point of Failure)",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Manual Available (Requires Additional Effort)",
+        "label": "Manual Available (Requires Additional Effort)",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Automated and Available",
+        "label": "Automated and Available",
+        "weight": 4
+      }
+    ],
+    "Environment Maturity": [
+      {
+        "key": 1,
+        "value": "Environment Obsolete",
+        "label": "Environment Obsolete",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Environment Somewhat Mature",
+        "label": "Environment Somewhat Mature",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Environment Mature/Maintained",
+        "label": "Environment Mature/Maintained",
+        "weight": 3
+      }
+    ],
+    "Time ot Implement": [
+      {
+        "key": 1,
+        "value": "More than 4 Hours",
+        "label": "More than 4 Hours",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "More than 1 Hour Less Than 4",
+        "label": "More than 1 Hour Less Than 4",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "More than 30 Minutes Less than 1 Hour",
+        "label": "More than 30 Minutes Less than 1 Hour",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Less than 30 Minutes",
+        "label": "Less than 30 Minutes",
+        "weight": 4
+      }
+    ],
+    "Change History": [
+      {
+        "key": 1,
+        "value": "Change has failed previously",
+        "label": "Change has failed previously",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Change has not been completed before",
+        "label": "Change has not been completed before",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Change has been completed with errors previously",
+        "label": "Change has been completed with errors previously",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Change has been completed successfully previously",
+        "label": "Change has been completed successfully previously",
+        "weight": 4
+      }
+    ],
+    "Deployment Window": [
+      {
+        "key": 1,
+        "value": "Inadequate Window to Implement/Backout",
+        "label": "Inadequate Window to Implement/Backout",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Adequate Window to Implement/Backout",
+        "label": "Adequate Window to Implement/Backout",
+        "weight": 4
+      }
+    ],
+    "Number of Staff/Teams Required": [
+      {
+        "key": 1,
+        "value": "Multiple Service Teams Required",
+        "label": "Multiple Service Teams Required",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "1 Service Team",
+        "label": "1 Service Team",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "4 or More Staff",
+        "label": "4 or More Staff",
+        "weight": 3
+      },
+      { "key": 4, "value": "1 Staff", "label": "1 Staff", "weight": 4 }
+    ],
+    "Pre-Production Testing": [
+      {
+        "key": 1,
+        "value": "No Testing Completed",
+        "label": "No Testing Completed",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "Some Testing Completed",
+        "label": "Some Testing Completed",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Previously Tested Successfully",
+        "label": "Previously Tested Successfully",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Unable to Test",
+        "label": "Unable to Test",
+        "weight": 4
+      }
+    ],
+    "Backout Plan": [
+      {
+        "key": 1,
+        "value": "Not Possible",
+        "label": "Not Possible",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "High Difficulty",
+        "label": "High Difficulty",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "Medium Difficulty",
+        "label": "Medium Difficulty",
+        "weight": 3
+      },
+      {
+        "key": 4,
+        "value": "Low Difficulty",
+        "label": "Low Difficulty",
+        "weight": 4
+      }
+    ],
+    "Change Scheduling": [
+      {
+        "key": 1,
+        "value": "During Peak Timing or Blackout time",
+        "label": "During Peak Timing or Blackout time",
+        "weight": 1
+      },
+      {
+        "key": 2,
+        "value": "During Production",
+        "label": "During Production",
+        "weight": 2
+      },
+      {
+        "key": 3,
+        "value": "During Production, at request of Client",
+        "label": "During Production, at request of Client",
+        "weight": 2
+      },
+      {
+        "key": 4,
+        "value": "Pre-Planned Maintenance Window",
+        "label": "Pre-Planned Maintenance Window",
+        "weight": 3
+      },
+      {
+        "key": 5,
+        "value": "After-Hours, Non-Production",
+        "label": "After-Hours, Non-Production",
+        "weight": 4
+      }
+    ]
+  }
+]
