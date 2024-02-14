@@ -303,3 +303,5 @@ sketch
 backend/core/settings.py
 backend/core/settings.py.
 backend/core/sendgridAPI.py
+
+frontend/node_modules/

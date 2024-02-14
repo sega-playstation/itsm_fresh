@@ -35,7 +35,7 @@ urlpatterns = [
     path('', include('problems.urls')),
     path('', include('assets.urls')),
     path('', include('comments.urls')),
-    path('', include('changes.urls')),
+    path('', include('change.urls')),
     path('', include('priority.urls')),
 
     path('', include('imports.urls')),

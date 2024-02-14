@@ -1,13 +1,66 @@
+from datetime import datetime
+from datetime import date
 import uuid
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-# from django.contrib.auth import get_user_model
-# from enumchoicefield import ChoiceEnum, EnumChoiceField
-from datetime import datetime
-# from assets.models import Asset
-# rom priority.models import Priority
-# from users.models import User, Course
+from django.contrib.auth import get_user_model
+from enumchoicefield import ChoiceEnum, EnumChoiceField
+# from email.policy import default
 
+from assets.models import Asset
+from servicegroup.models import ServiceGroup, Technicians
+from users.models import User, Course
+
+#Create your models here.
+
+# Change Request Details tab
+class RequestType(ChoiceEnum):
+     STANDARD  = "Standard"
+     NORMAL    = "Normal"
+     MAJOR     = "Major"
+     EMERGENCY = "Emergency"
+     LATENT    = "Latent"
+
+# Risk Assessment tab
+class ChangeHistory(ChoiceEnum):
+     NOTBEFORE = "Change has not been completed before"
+     FAILED    = "Previous change attempted, failed"
+     ERRORS    = "Previous change completed, with errors"
+     SUCCESS   = "Previous change completed successfully"
+
+class Environment(ChoiceEnum):
+     NOTBEFORE = "Information Only"
+     FAILED    = "Test"
+     ERRORS    = "Production"
+
+class DocumentationOfConfiguration(ChoiceEnum):
+     COMPLETE    = "Complete/Up to Date"
+     INCOMPLETE  = "Incomplete/Out of date"
+     HALFLESSER  = "Less than half complete"
+     HALFGREATER = "More than half complete"
+
+# Install/Backout Plan tab
+class NumberOfEmployeesRequired(ChoiceEnum):
+     STAFF = "1-3 staff members required"
+     TEAM  = "1 team required"
+     TEAMS = "Multiple teams required"
+
+class BackOutPlanDifficulty(ChoiceEnum):
+     LOW    = "Low"
+     MEDIUM = "Medium"
+     HIGH   = "High"
+
+
+# Business Plan tab
+class Duration(ChoiceEnum):
+     ONEWEEK  = "1 week"
+     TWOWEEKS = "2 weeks"
+     ONEMO    = "1 months"
+     THREEMO  = "3 months"
+     SIXMO    = "6 months"
+
+
+# Related to ticket creation
 class Approvals(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
@@ -35,7 +88,7 @@ class ChangeRequest(models.Model):
     choose_environment = models.CharField(max_length=50, null=True, blank=True)
     are_there_dependencies = models.BooleanField(default=False)
     #ASSETS
-    #assets = models.ManyToManyField(Asset, blank=True)  # a change request can involve multiple assets
+    assets = models.ManyToManyField(Asset, blank=True)  # a change request can involve multiple assets
     current_environment_maturity = models.CharField(max_length=50, null=True, blank=True)
     documentation_of_config = models.CharField(max_length=50, null=True, blank=True)
 
@@ -46,7 +99,7 @@ class ChangeRequest(models.Model):
     backout_difficulty = models.CharField(max_length=50, null=True, blank=True)
     backout_desc = models.TextField(null=True, blank=True)
 
-    start_date = models.DateTimeField(default=datetime.now)
+    start_date = models.DateField(default=date.today)
     perm_or_temp = models.BooleanField(default=False)
     time_to_implement = models.CharField(max_length=50, null=True, blank=True)
     business_case_desc = models.TextField(null=True, blank=True)
@@ -57,20 +110,20 @@ class ChangeRequest(models.Model):
     #priority = models.ForeignKey(Priority, related_name="change_request_priority", null=True, on_delete=models.SET_NULL, to_field="priority_id")
     # requestOwnerSection = models.ForeignKey(Course, related_name="change_requests", null=True, on_delete=models.SET_NULL)
 
-# @staticmethod
-# def generate_ticket_number():
-#         count = ChangeRequest.objects.count()
-#         number = (count % 99999) + 1
-#         padded_number = str(number).zfill(5)
-#         date_str = date.today().strftime("%Y%m%d")
-#         return f"CHR{padded_number}-{date_str}"
+@staticmethod
+def generate_ticket_number():
+        count = ChangeRequest.objects.count()
+        number = (count % 99999) + 1
+        padded_number = str(number).zfill(5)
+        date_str = date.today().strftime("%Y%m%d")
+        return f"CHR{padded_number}-{date_str}"
 
-# requestNumber = models.CharField(
-#         max_length=20, unique=True, default=generate_ticket_number)
+requestNumber = models.CharField(
+        max_length=20, unique=True, default=generate_ticket_number)
 
-# class Meta:
-#         verbose_name_plural = "Change Requests"
+class Meta:
+        verbose_name_plural = "Change Requests"
 
-# def __str__(self):
-#         return self.ticket_number
+def __str__(self):
+        return self.ticket_number
 
