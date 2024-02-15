@@ -226,26 +226,26 @@ const routes = [
             path: '/change/all',
             element: <ChangeListRouter />,
           },
-          {
-            path: '/change/pending',
-            element: <ChangeListRouter />,
-          },
-          {
-            path: '/change/approved',
-            element: <ChangeListRouter />,
-          },
-          {
-            path: '/change/new',
-            element: <ChangeRouter />,
-          },
-          {
-            path: '/change/view',
-            element: <ChangeRouter />,
-          },
-          {
-            path: '/change/edit',
-            element: <ChangeRouter />,
-          },
+          // {
+          //   path: '/change/pending',
+          //   element: <ChangeListRouter />,
+          // },
+          // {
+          //   path: '/change/approved',
+          //   element: <ChangeListRouter />,
+          // },
+          // {
+          //   path: '/change/new',
+          //   element: <ChangeRouter />,
+          // },
+          // {
+          //   path: '/change/view',
+          //   element: <ChangeRouter />,
+          // },
+          // {
+          //   path: '/change/edit',
+          //   element: <ChangeRouter />,
+          // },
           // Sections
           {
             path: '/sections',
