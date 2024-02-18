@@ -12,8 +12,8 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import classes from './Sidebar.module.css';
 import Link from '@mui/material/Link';
 
-/*
-Deprecated Sidebar, Reference Only!!!
+/* 
+Deprecated Sidebar, Reference Only!!! 
 Use Sidebar2 for future development!!!
 */
 
@@ -88,7 +88,7 @@ function Sidebar() {
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <StarBorder />
-              </ListItemIcon>asset
+              </ListItemIcon>
               <Link href={userListItem.url} underline="none">
                 <ListItemText primary={userListItem.title} />
               </Link>

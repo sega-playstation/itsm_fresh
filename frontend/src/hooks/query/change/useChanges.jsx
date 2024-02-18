@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { Axios } from '@/utils/Axios';
 
-export function useChange(courseId) {
+export function useAssets(courseId) {
   return useQuery({
-    queryKey: ['change', courseId ?? ''],
+    queryKey: ['assets', courseId ?? ''],
     queryFn: async () => {
       let endpoint = '';
       if (courseId) {
-        endpoint = `/api/change/section/?courseID=${courseId}`; // Any user
+        endpoint = `/api/assets/section/?courseID=${courseId}`; // Any user
       } else {
-        endpoint = '/api/change/'; // Admin only
+        endpoint = '/api/assets/'; // Admin only
       }
       const users = await Axios.get(endpoint).then((resp) => resp.data);
       return users;

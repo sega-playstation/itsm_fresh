@@ -14,8 +14,8 @@ import OpenProblemPage from '@/pages/deprecated/problem/open';
 import ResolvedProblemPage from '@/pages/deprecated/problem/resolved';
 import ViewProblemPage from '@/pages/deprecated/problem/problem';
 import EditProblemPage from '@/pages/deprecated/problem/edit';
-import ChangeRouter from '@/pages/deprecated/change/ChangeRouter';
-import ChangeListRouter from '@/pages/deprecated/change/ChangeListRouter';
+// import ChangeRouter from '@/pages/deprecated/change/ChangeRouter';
+// import ChangeListRouter from '@/pages/deprecated/change/ChangeListRouter';
 import Users from '@/pages/users/Users';
 import NoMatch from '@/pages/NoMatch';
 import Sections from '@/pages/sections/Sections';
@@ -222,10 +222,10 @@ const routes = [
             ],
           },
           // Change Management
-          {
-            path: '/change/all',
-            element: <ChangeListRouter />,
-          },
+          // {
+          //   path: '/change/all',
+          //   element: <ChangeListRouter />,
+          // },
           // {
           //   path: '/change/pending',
           //   element: <ChangeListRouter />,

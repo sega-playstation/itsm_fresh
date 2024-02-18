@@ -10,23 +10,23 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useChange } from '@/hooks/query/change/useChanges';
+import { useAssets } from '@/hooks/query/assets/useAssets';
 import { useContext } from 'react';
 import UserContext from '@/components/UserContext';
 import { UserRole } from '@/utils/enums';
 import { startCase, toLower } from 'lodash';
 
-export default function Change() {
+export default function Assets() {
   const { user, selectedCourse } = useContext(UserContext);
-  const { status, isRefetching, data } = useChange(
+  const { status, isRefetching, data } = useAssets(
     user.roleId !== UserRole.ADMIN ? selectedCourse : undefined,
   );
   const navigateSearch = useNavigateParams();
 
   const columns = [
     {
-      field: 'change_tag',
-      headerName: 'Change Number',
+      field: 'asset_tag',
+      headerName: 'Asset Number',
       flex: 1,
       valueFormatter: (params) => {
         if (params.value === null) {
@@ -41,7 +41,7 @@ export default function Change() {
       flex: 1,
     },
     {
-      field: 'change_name',
+      field: 'asset_name',
       headerName: 'Name',
       flex: 1,
     },
@@ -86,9 +86,9 @@ export default function Change() {
 
   return (
     <DataGridPage
-      title="Change"
+      title="Assets"
       ActionIcon={AddCircleIcon}
-      actionLabel="New Change"
+      actionLabel="New Asset"
       actionTo="add"
       element={
         <JoyDataGrid
@@ -103,7 +103,7 @@ export default function Change() {
             sorting: {
               sortModel: [
                 {
-                  field: 'change_tag',
+                  field: 'asset_tag',
                   sort: 'desc',
                 },
               ],

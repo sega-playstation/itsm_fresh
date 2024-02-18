@@ -66,16 +66,39 @@ const mainMenus = [
     ],
   },
   {
-    path: '/change',
+    path: '/changes',
     label: 'Change Management',
     Icon: SwapHorizontalCircleIcon,
     submenu: [
       {
-        path: '/change',
+        path: '/changes',
         label: 'Changes',
       },
     ],
   },
+  // {
+  //   path: '/changes',
+  //   label: 'Change Management',
+  //   Icon: SwapHorizontalCircleIcon,
+  //   submenu: [
+  //     {
+  //       path: '/change/new',
+  //       label: 'New Change Request',
+  //     },
+  //     {
+  //       path: '/change/all',
+  //       label: 'Change Request List',
+  //     },
+  //     {
+  //       path: '/change/pending',
+  //       label: 'Pending Request List',
+  //     },
+  //     {
+  //       path: '/change/approved',
+  //       label: 'Approved Request List',
+  //     },
+  //   ],
+  // },
   {
     path: '/users',
     label: 'User Management',

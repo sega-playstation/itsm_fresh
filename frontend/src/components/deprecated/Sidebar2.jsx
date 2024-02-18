@@ -214,28 +214,28 @@ const AssetSubNav = [
   { title: 'Asset List', icon: <FormatListBulletedIcon />, url: '/asset/all' },
 ];
 
-const ChangeSubNav = [
-  {
-    title: 'New Change Request',
-    icon: <RequestPageIcon />,
-    url: '/change/new',
-  },
-  {
-    title: 'Change Request List',
-    icon: <FormatListBulletedIcon />,
-    url: '/change/all',
-  },
-  {
-    title: 'Pending Request List',
-    icon: <FindInPageIcon />,
-    url: '/change/pending',
-  },
-  {
-    title: 'Approved Request List',
-    icon: <AssignmentTurnedInIcon />,
-    url: '/change/approved',
-  },
-];
+// const ChangeSubNav = [
+//   {
+//     title: 'Changes',
+//     icon: <RequestPageIcon />,
+//     url: '/change/new',
+//   },
+//   {
+//     title: 'Change Request List',
+//     icon: <FormatListBulletedIcon />,
+//     url: '/change/all',
+//   },
+//   {
+//     title: 'Pending Request List',
+//     icon: <FindInPageIcon />,
+//     url: '/change/pending',
+//   },
+//   {
+//     title: 'Approved Request List',
+//     icon: <AssignmentTurnedInIcon />,
+//     url: '/change/approved',
+//   },
+// ];
 
 const ExportSubNav = [
   {
