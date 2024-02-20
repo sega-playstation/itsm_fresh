@@ -8,7 +8,7 @@ from priority.models import *
 from incidents.models import *
 from users.models import *
 from assets.models import *
-from change.models import *
+from changes.models import *
 # from users.views import SendGridMailSender
 
 from pathlib import Path
