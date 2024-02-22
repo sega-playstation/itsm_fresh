@@ -1,22 +1,22 @@
-import { useDeleteAsset } from '@/hooks/query/assets/useAsset';
+import { useDeleteChange } from '@/hooks/query/changes/useChange';
 import UserContext from '@/components/UserContext';
 import { UserRole } from '@/utils/enums';
 import { DialogContent, DialogActions, Button, Divider } from '@mui/joy';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-export default function AssetDelete({ color, handleClose }) {
+export default function ChangeDelete({ color, handleClose }) {
   const { user, selectedCourse } = useContext(UserContext);
-  const { assetId } = useParams();
-  const { status, mutate } = useDeleteAsset(
-    assetId,
+  const { changeId } = useParams();
+  const { status, mutate } = useDeleteChange(
+    changeId,
     user.roleId !== UserRole.ADMIN ? selectedCourse : undefined,
     handleClose,
   );
 
   return (
     <>
-      <DialogContent>Are you sure you want to delete this asset?</DialogContent>
+      <DialogContent>Are you sure you want to delete this change?</DialogContent>
       <Divider inset="context" />
       <DialogActions>
         <Button

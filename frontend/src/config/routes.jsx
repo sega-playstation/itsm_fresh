@@ -14,6 +14,7 @@ import OpenProblemPage from '@/pages/deprecated/problem/open';
 import ResolvedProblemPage from '@/pages/deprecated/problem/resolved';
 import ViewProblemPage from '@/pages/deprecated/problem/problem';
 import EditProblemPage from '@/pages/deprecated/problem/edit';
+// DEP CHANGES
 // import ChangeRouter from '@/pages/deprecated/change/ChangeRouter';
 // import ChangeListRouter from '@/pages/deprecated/change/ChangeListRouter';
 import Users from '@/pages/users/Users';
@@ -36,12 +37,18 @@ import Settings from '@/pages/Settings';
 import AccountRequests from '@/pages/users/AccountRequests';
 import RoleRoutes from '@/pages/RoleRoutes';
 import Classlist from '@/pages/users/Classlist';
+// ASSETS
 import AssetForm from '@/pages/assets/modals/AssetForm';
 import AssetDelete from '@/pages/assets/modals/AssetDelete';
 import AssetView from '@/pages/assets/modals/AssetView';
 import Assets from '@/pages/assets/Assets';
+// CHANGES
+import ChangeForm from '@/pages/changes/modals/ChangeForm';
+import ChangeDelete from '@/pages/changes/modals/ChangeDelete';
+import ChangeView from '@/pages/changes/modals/ChangeView';
+import Changes from '@/pages/changes/Changes';
+// ENUMS
 import { UserRole } from '@/utils/enums';
-
 // Icons
 import PersonIcon from '@mui/icons-material/Person';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumberedRounded';
@@ -215,6 +222,81 @@ const routes = [
                     color="danger"
                     closeTo="/assets"
                     Component={AssetDelete}
+                    alertDialog
+                  />
+                ),
+              },
+            ],
+          },
+           // Change Management
+           {
+            path: '/changes',
+            element: <Changes />,
+            children: [
+              {
+                path: 'add',
+                element: (
+                  <ModalPage
+                    title="New Change"
+                    Icon={InventoryIcon}
+                    color="primary"
+                    closeTo="/changes"
+                    Component={ChangeForm}
+                    type="create"
+                  />
+                ),
+              },
+              {
+                path: ':changeId',
+                element: (
+                  <ModalPage
+                    title="View Change"
+                    Icon={InventoryIcon}
+                    color="neutral"
+                    closeTo="/changes"
+                    Component={ChangeView}
+                    type="view"
+                  />
+                ),
+                children: [
+                  {
+                    path: 'dependency/:dependencyId',
+                    element: (
+                      <ModalPage
+                        title="View Dependency"
+                        Icon={LinkIcon}
+                        nested={true}
+                        color="neutral"
+                        closeTo="/changes/:changeId"
+                        Component={ChangeView}
+                        type="dependency"
+                      />
+                    ),
+                  },
+                ],
+              },
+              {
+                path: 'edit/:changeId',
+                element: (
+                  <ModalPage
+                    title="Edit Change"
+                    Icon={InventoryIcon}
+                    color="warning"
+                    closeTo="/changes"
+                    Component={ChangeForm}
+                    type="update"
+                  />
+                ),
+              },
+              {
+                path: 'delete/:changeId',
+                element: (
+                  <ModalPage
+                    title="Delete Change"
+                    Icon={InventoryIcon}
+                    color="danger"
+                    closeTo="/changes"
+                    Component={ChangeDelete}
                     alertDialog
                   />
                 ),

@@ -4,29 +4,29 @@ import DataGridPage from '@/components/layout/DataGridPage';
 import JoyDataGrid from '@/components/joy/JoyDataGrid';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import useNavigateParams from '@/hooks/useNavigateParams';
-
 // Icons
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useAssets } from '@/hooks/query/assets/useAssets';
+//CHANGES
+import { useChanges } from '@/hooks/query/changes/useChanges';
 import { useContext } from 'react';
 import UserContext from '@/components/UserContext';
 import { UserRole } from '@/utils/enums';
 import { startCase, toLower } from 'lodash';
 
-export default function Assets() {
+export default function Changes() {
   const { user, selectedCourse } = useContext(UserContext);
-  const { status, isRefetching, data } = useAssets(
+  const { status, isRefetching, data } = useChanges(
     user.roleId !== UserRole.ADMIN ? selectedCourse : undefined,
   );
   const navigateSearch = useNavigateParams();
 
   const columns = [
     {
-      field: 'asset_tag',
-      headerName: 'Asset Number',
+      field: 'change_tag',
+      headerName: 'Change Number',
       flex: 1,
       valueFormatter: (params) => {
         if (params.value === null) {
@@ -36,29 +36,23 @@ export default function Assets() {
       },
     },
     {
-      field: 'serial_number',
-      headerName: 'Serial Number',
-      flex: 1,
-    },
-    {
-      field: 'asset_name',
+      field: 'change_request_name',
       headerName: 'Name',
       flex: 1,
     },
     {
-      field: 'category',
-      headerName: 'Category',
+      field: 'change_request_type',
+      headerName: 'Request Type',
       flex: 1,
-      valueFormatter: (params) => {
-        if (params.value === null) {
-          return '';
-        }
-        return startCase(toLower(params.value));
-      },
     },
     {
-      field: 'ip_address',
-      headerName: 'IP Address',
+      field: 'assigned_technician',
+      headerName: 'Assigned Technician',
+      flex: 1,
+    },
+    {
+      field: 'request_contact',
+      headerName: 'Request Contact',
       flex: 1,
     },
     {
@@ -86,9 +80,9 @@ export default function Assets() {
 
   return (
     <DataGridPage
-      title="Assets"
+      title="Changes"
       ActionIcon={AddCircleIcon}
-      actionLabel="New Asset"
+      actionLabel="New Change"
       actionTo="add"
       element={
         <JoyDataGrid
@@ -103,7 +97,7 @@ export default function Assets() {
             sorting: {
               sortModel: [
                 {
-                  field: 'asset_tag',
+                  field: 'change_tag',
                   sort: 'desc',
                 },
               ],

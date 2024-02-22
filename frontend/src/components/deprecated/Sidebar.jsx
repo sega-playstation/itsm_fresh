@@ -12,8 +12,8 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import classes from './Sidebar.module.css';
 import Link from '@mui/material/Link';
 
-/* 
-Deprecated Sidebar, Reference Only!!! 
+/*
+Deprecated Sidebar, Reference Only!!!
 Use Sidebar2 for future development!!!
 */
 
