@@ -44,3 +44,72 @@ export const AssetCategory = Object.freeze({
   /* Other. */
   OTHER: 'OTHER',
 });
+
+/**
+ * Change Request Types.
+ */
+export const RequestType = Object.freeze({
+  STANDARD: "Standard",
+  NORMAL: "Normal",
+  MAJOR: "Major",
+  EMERGENCY: "Emergency",
+  LATENT: "Latent",
+});
+
+/**
+ * Change History Options.
+ */
+export const ChangeHistory = Object.freeze({
+  NOTBEFORE: "Change has not been completed before",
+  FAILED: "Previous change attempted, failed",
+  ERRORS: "Previous change completed, with errors",
+  SUCCESS: "Previous change completed successfully",
+});
+
+/**
+ * Change Request Environments.
+ */
+export const Environment = Object.freeze({
+  NOTBEFORE: "Information Only",
+  FAILED: "Test",
+  ERRORS: "Production",
+});
+
+/**
+ * Documentation of Configuration States.
+ */
+export const DocumentationOfConfiguration = Object.freeze({
+  COMPLETE: "Complete/Up to Date",
+  INCOMPLETE: "Incomplete/Out of date",
+  HALFLESSER: "Less than half complete",
+  HALFGREATER: "More than half complete",
+});
+
+/**
+ * Number of Employees Required for Install/Backout Plan.
+ */
+export const NumberOfEmployeesRequired = Object.freeze({
+  STAFF: "1-3 staff members required",
+  TEAM: "1 team required",
+  TEAMS: "Multiple teams required",
+});
+
+/**
+ * BackOut Plan Difficulty Levels.
+ */
+export const BackOutPlanDifficulty = Object.freeze({
+  LOW: "Low",
+  MEDIUM: "Medium",
+  HIGH: "High",
+});
+
+/**
+ * Duration Options for Business Plan.
+ */
+export const Duration = Object.freeze({
+  ONEWEEK: "1 week",
+  TWOWEEKS: "2 weeks",
+  ONEMO: "1 months",
+  THREEMO: "3 months",
+  SIXMO: "6 months",
+});

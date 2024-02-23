@@ -14,7 +14,8 @@ import ModalTabs from '@/components/layout/ModalTabs';
 import { useForm } from 'react-hook-form';
 import LoadingSpinner from '@/components/layout/LoadingSpinner';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { baseSchema } from '@/utils/formschema/assets';
+//Changes made here to baseschema to fit changes
+import { baseSchema } from '@/utils/formschema/changes';
 import { forwardRef, useContext, useEffect } from 'react';
 import SelectField from '@/components/joy/forms/SelectField';
 import TextareaField from '@/components/joy/forms/TextareaField';
@@ -29,14 +30,14 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import NavigateParams from '@/components/NavigateParams';
 import { useParams } from 'react-router-dom';
 import {
-  useAddAsset,
-  useAsset,
-  useUpdateAsset,
-} from '@/hooks/query/assets/useAsset';
+  useAddChange,
+  useChange,
+  useUpdateChange,
+} from '@/hooks/query/changes/useChange';
 import UserContext from '@/components/UserContext';
-import { AssetCategory, AssetStatus, UserRole } from '@/utils/enums';
+import { RequestType, ChangeHistory, Environment, DocumentationOfConfiguration, NumberOfEmployeesRequired, BackOutPlanDifficulty, Duration } from '@/utils/enums';
 import { cloneDeep, startCase, toLower } from 'lodash';
-import { useAssets } from '@/hooks/query/assets/useAssets';
+import { useChanges } from '@/hooks/query/changes/useChanges';
 
 // eslint-disable-next-line react/display-name
 const Listbox = forwardRef((props, ref) => (
@@ -58,19 +59,19 @@ const Listbox = forwardRef((props, ref) => (
   />
 ));
 
-export default function AssetForm({ type, color, handleClose, closeTo }) {
+export default function ChangeForm({ type, color, handleClose, closeTo }) {
   const { user, selectedCourse } = useContext(UserContext);
-  const { assetId } = useParams();
-  const { status: assetsStatus, data: assetsData } = useAssets(
+  const { changeId } = useParams();
+  const { status: changesStatus, data: changesData } = useChanges(
     user.roleId !== UserRole.ADMIN ? selectedCourse : undefined,
   );
-  const { status: assetStatus, data: assetData } = useAsset(
-    assetId,
+  const { status: changeStatus, data: changeData } = useChange(
+    changeId,
     selectedCourse,
     type === 'update',
   );
-  const updateAsset = useUpdateAsset(assetId, selectedCourse, handleClose);
-  const addAsset = useAddAsset(selectedCourse, handleClose);
+  const updateChange = useUpdateChange(changeId, selectedCourse, handleClose);
+  const addChange = useAddChange(selectedCourse, handleClose);
 
   const {
     handleSubmit,
@@ -85,44 +86,44 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
 
   const onSubmit = async (data) => {
     const shapedData = cloneDeep(data);
-    if (shapedData.asset_dependencies) {
-      shapedData.asset_dependencies = data.asset_dependencies.map(
+    if (shapedData.change_dependencies) {
+      shapedData.change_dependencies = data.change_dependencies.map(
         (dependency) => dependency.id,
       );
     }
 
     if (type === 'update') {
-      return updateAsset.mutateAsync(shapedData);
+      return updateChange.mutateAsync(shapedData);
     } else {
-      return addAsset.mutateAsync(shapedData);
+      return addChange.mutateAsync(shapedData);
     }
   };
 
   useEffect(() => {
-    if (!assetData) return;
+    if (!changeData) return;
     reset({
-      ...assetData,
-      asset_dependencies: assetData.asset_dependencies.map((asset) => ({
-        id: asset,
+      ...changeData,
+      change_dependencies: changeData.change_dependencies.map((change) => ({
+        id: change,
       })),
     });
-  }, [reset, assetData]);
+  }, [reset, changeData]);
 
   if (
-    (type === 'update' && assetStatus === 'pending') ||
-    assetsStatus === 'pending'
+    (type === 'update' && changeStatus === 'pending') ||
+    changesStatus === 'pending'
   )
     return <LoadingSpinner />;
   if (
-    (type === 'update' && assetStatus === 'error') ||
-    assetsStatus === 'error'
+    (type === 'update' && changeStatus === 'error') ||
+    changesStatus === 'error'
   )
     return <NavigateParams to={closeTo} />;
 
   // Organize by type, sort within that type by ID
-  let options = [...assetsData];
+  let options = [...changesData];
   if (type === 'update') {
-    options = options.filter((asset) => asset.id !== assetData.id);
+    options = options.filter((change) => change.id !== changeData.id);
   }
 
   const sortedOptions = options.sort(
@@ -141,8 +142,8 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
             <ModalTabs.Tab label="General">
               <Stack spacing={2} sx={{ flexGrow: 1 }}>
                 <TextField
-                  name="asset_name"
-                  label="Asset Name *"
+                  name="change_name"
+                  label="Change Name *"
                   control={control}
                 />
                 <TextField
@@ -153,7 +154,7 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
                 <SelectField
                   name="category"
                   label="Category *"
-                  options={Object.entries(AssetCategory).map(
+                  options={Object.entries(ChangeCategory).map(
                     ([key, value]) => ({
                       id: value,
                       label: startCase(toLower(key)),
@@ -164,7 +165,7 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
                 <SelectField
                   name="status"
                   label="Status *"
-                  options={Object.entries(AssetStatus).map(([key, value]) => ({
+                  options={Object.entries(ChangeStatus).map(([key, value]) => ({
                     id: value,
                     label: startCase(toLower(key)),
                   }))}
@@ -234,16 +235,16 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
             </ModalTabs.Tab>
             <ModalTabs.Tab label="Dependencies">
               <AutocompleteField
-                name="asset_dependencies"
-                label="Assets"
+                name="change_dependencies"
+                label="Changes"
                 startDecorator={<SearchIcon />}
-                placeholder="Filter assets"
-                noOptionsText="No assets"
+                placeholder="Filter Changes"
+                noOptionsText="No changes"
                 open
                 multiple
                 slots={{ listbox: Listbox }}
                 options={sortedOptions}
-                getOptionLabel={(option) => option.asset_name}
+                getOptionLabel={(option) => option.change_name}
                 groupBy={(option) => option.category}
                 renderTags={() => null}
                 renderOption={(props, option, { selected }) => (
@@ -256,7 +257,7 @@ export default function AssetForm({ type, color, handleClose, closeTo }) {
                       )}
                     </ListItemDecorator>
                     <ListItemContent sx={{ fontSize: 'sm' }}>
-                      {option.asset_name}
+                      {option.change_name}
                     </ListItemContent>
                   </AutocompleteOption>
                 )}

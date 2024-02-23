@@ -19,7 +19,7 @@ export function useChange(changeId, courseId, enabled) {
   });
 }
 
-// Create Asset
+// Create Change
 export function useAddChange(courseId, callbackFn) {
   const queryClient = useQueryClient();
   let endpoint = '';
@@ -44,7 +44,7 @@ export function useUpdateChange(changeId, courseId, callbackFn) {
   if (courseId === undefined || courseId === null || courseId.length == 0) {
     endpoint = `/api/changes/${changeId}/`;
   } else {
-    endpoint = `/api/changes/section/${assetId}/?courseId=${courseId}/`;
+    endpoint = `/api/changes/section/${changeId}/?courseId=${courseId}/`;
   }
   return useMutation({
     mutationFn: (data) => Axios.patch(endpoint, data).then((resp) => resp.data),
@@ -56,8 +56,8 @@ export function useUpdateChange(changeId, courseId, callbackFn) {
   });
 }
 
-// Delete Asset
-export function useDeleteAsset(changeId, courseId, callbackFn) {
+// Delete Change
+export function useDeleteChange(changeId, courseId, callbackFn) {
   const queryClient = useQueryClient();
   let endpoint = '';
   if (courseId === undefined || courseId === null || courseId.length == 0) {

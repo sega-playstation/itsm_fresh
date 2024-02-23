@@ -16,26 +16,26 @@ import {
 import { startCase, toLower, groupBy } from 'lodash';
 import useNavigateParams from '@/hooks/useNavigateParams';
 import { Outlet, useParams } from 'react-router-dom';
-import { useAsset } from '@/hooks/query/assets/useAsset';
+import { useChange } from '@/hooks/query/changes/useChange';
 import LoadingSpinner from '@/components/layout/LoadingSpinner';
 import NavigateParams from '@/components/NavigateParams';
 import { useContext } from 'react';
 import UserContext from '@/components/UserContext';
-import { AssetStatus } from '@/utils/enums';
+// import { ChangeStatus } from '@/utils/enums';
 
-export default function AssetView({ type, color, handleClose, closeTo }) {
+export default function ChangeView({ type, color, handleClose, closeTo }) {
   const { selectedCourse } = useContext(UserContext);
   const navigate = useNavigateParams();
-  const { assetId, dependencyId } = useParams();
-  const { status, data } = useAsset(
-    type === 'dependency' ? dependencyId : assetId,
+  const { changeId, dependencyId } = useParams();
+  const { status, data } = useChange(
+    type === 'dependency' ? dependencyId : changeId,
     selectedCourse,
   );
 
   if (status === 'pending') return <LoadingSpinner />;
   if (status === 'error') return <NavigateParams to={closeTo} />;
 
-  const groupedAssets = groupBy(data.asset_dependencies_details, 'category');
+  const groupedChange = groupBy(data.change_dependencies_details, 'category');
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function AssetView({ type, color, handleClose, closeTo }) {
         <ModalTabs>
           <ModalTabs.Tab label="General">
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
-              <LabelText label="Asset Name">{data.asset_name}</LabelText>
+              <LabelText label="Change Name">{data.change_name}</LabelText>
               <LabelText label="Serial Number">{data.serial_number}</LabelText>
               <LabelText label="Category">
                 {startCase(toLower(data.category))}
@@ -51,8 +51,8 @@ export default function AssetView({ type, color, handleClose, closeTo }) {
               <LabelText label="Status">
                 {startCase(
                   toLower(
-                    Object.keys(AssetStatus).find(
-                      (key) => AssetStatus[key] === data.status,
+                    Object.keys(ChangeStatus).find(
+                      (key) => ChangeStatus[key] === data.status,
                     ),
                   ),
                 )}
@@ -88,27 +88,27 @@ export default function AssetView({ type, color, handleClose, closeTo }) {
                   'var(--joy-shadowRing, 0 0 #000),0px 1px 2px 0px rgba(var(--joy-shadowChannel, 21 21 21) / var(--joy-shadowOpacity, 0.08))',
               }}
             >
-              <List size="sm" name="asset_dependencies" label="Assets">
-                {Object.entries(groupedAssets).map(
-                  ([cat, assets], catIndex) => (
+              <List size="sm" name="change_dependencies" label="Changes">
+                {Object.entries(groupedChanges).map(
+                  ([cat, changes], catIndex) => (
                     <ListItem nested key={catIndex}>
                       <ListSubheader sticky>{cat}</ListSubheader>
                       <List>
-                        {assets.map((asset, assetIndex) => (
-                          <ListItem key={assetIndex}>
+                        {changes.map((change, changeIndex) => (
+                          <ListItem key={changeIndex}>
                             {type === 'dependency' ? (
                               <ListItemContent>
-                                {asset.asset_name}
+                                {change.change_name}
                               </ListItemContent>
                             ) : (
                               <ListItemButton
                                 sx={{ userSelect: 'none' }}
                                 disabled={type === 'dependency'}
                                 onClick={() =>
-                                  navigate('dependency/' + asset.id)
+                                  navigate('dependency/' + change.id)
                                 }
                               >
-                                {asset.asset_name}
+                                {change.change_name}
                               </ListItemButton>
                             )}
                           </ListItem>
