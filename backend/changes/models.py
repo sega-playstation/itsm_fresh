@@ -12,6 +12,11 @@ from servicegroup.models import ServiceGroup, Technicians
 from users.models import User, Course
 
 #Create your models here.
+# Create your models here.
+class Change_Status(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    change_status_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=100)
 
 # Changes Request Details tab
 class RequestType(ChoiceEnum):
@@ -59,6 +64,18 @@ class Duration(ChoiceEnum):
      THREEMO  = "3 months"
      SIXMO    = "6 months"
 
+# Change Request Statuses
+class ChangeStatus(ChoiceEnum):
+    PENDING_APPROVAL = "Pending Approval"
+    APPROVED = "Approved"
+    SCHEDULED = "Scheduled"
+    IN_PROGRESS = "In Progress"
+    COMPLETED = "Completed"
+    FAILED = "Failed"
+    CANCELLED = "Cancelled"
+    ROLLBACK = "Rollback"
+
+
 
 # Related to ticket creation
 class Approvals(models.Model):
@@ -103,6 +120,7 @@ class ChangeRequest(models.Model):
     perm_or_temp = models.BooleanField(default=False)
     time_to_implement = models.CharField(max_length=50, null=True, blank=True)
     business_case_desc = models.TextField(null=True, blank=True)
+    change_status = EnumChoiceField(ChangeStatus, default=ChangeStatus.PENDING_APPROVAL)
 
     # Additional foreign keys
     #impact = models.ForeignKey(Priority, related_name="change_request_impact", null=True, on_delete=models.SET_NULL, to_field="priority_id")

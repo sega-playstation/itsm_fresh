@@ -113,3 +113,16 @@ export const Duration = Object.freeze({
   THREEMO: "3 months",
   SIXMO: "6 months",
 });
+/**
+ * Change Status Options for Change Requests.
+ */
+export const ChangeStatus = Object.freeze({
+  PENDING_APPROVAL: "Pending Approval",
+  APPROVED: "Approved",
+  SCHEDULED: "Scheduled",
+  IN_PROGRESS: "In Progress",
+  COMPLETED: "Completed",
+  FAILED: "Failed",
+  CANCELLED: "Cancelled",
+  ROLLBACK: "Rollback",
+});
