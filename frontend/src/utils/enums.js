@@ -46,7 +46,7 @@ export const AssetCategory = Object.freeze({
 });
 
 /**
- * Change Request Types.
+ * Request Types for Change Requests.
  */
 export const RequestType = Object.freeze({
   STANDARD: "Standard",
@@ -65,14 +65,13 @@ export const ChangeHistory = Object.freeze({
   ERRORS: "Previous change completed, with errors",
   SUCCESS: "Previous change completed successfully",
 });
-
 /**
  * Change Request Environments.
  */
-export const Environment = Object.freeze({
-  NOTBEFORE: "Information Only",
-  FAILED: "Test",
-  ERRORS: "Production",
+export const ChooseEnvironment = Object.freeze({
+  INFO: "Information Only",
+  TEST: "Test",
+  PRODUCTION: "Production",
 });
 
 /**
@@ -88,7 +87,8 @@ export const DocumentationOfConfiguration = Object.freeze({
 /**
  * Number of Employees Required for Install/Backout Plan.
  */
-export const NumberOfEmployeesRequired = Object.freeze({
+export const RequiredEmployees = Object.freeze({
+  NONE: "",
   STAFF: "1-3 staff members required",
   TEAM: "1 team required",
   TEAMS: "Multiple teams required",
@@ -104,15 +104,25 @@ export const BackOutPlanDifficulty = Object.freeze({
 });
 
 /**
+ * Time forcast for Business Plan.
+ */
+export const PermTemp = Object.freeze({
+  NONE: "",
+  TEMPORARY: "Temporary",
+  PERMANENT: "Permanent",
+});
+
+/**
  * Duration Options for Business Plan.
  */
 export const Duration = Object.freeze({
   ONEWEEK: "1 week",
   TWOWEEKS: "2 weeks",
-  ONEMO: "1 months",
+  ONEMO: "1 month",
   THREEMO: "3 months",
   SIXMO: "6 months",
 });
+
 /**
  * Change Status Options for Change Requests.
  */
@@ -126,3 +136,22 @@ export const ChangeStatus = Object.freeze({
   CANCELLED: "Cancelled",
   ROLLBACK: "Rollback",
 });
+
+/**
+ * Redundancy Options for Change Requests.
+ */
+export const RedundancyTypes = Object.freeze({
+  NONE: "",
+  MANUAL: "Manual",
+  AUTOMATIC: "Automatic",
+});
+
+/**
+ * Environment Maturity Options for Change Requests.
+ */
+export const EnvironmentMaturity = Object.freeze({
+  NONE: "",
+  OBSOLETE: "Obsolete",
+  MATURE_MAINTAINED: "Mature/Maintained",
+});
+

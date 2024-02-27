@@ -35,7 +35,7 @@ import {
   useUpdateChange,
 } from '@/hooks/query/changes/useChange';
 import UserContext from '@/components/UserContext';
-import { RequestType, ChangeHistory, Environment, DocumentationOfConfiguration, NumberOfEmployeesRequired, BackOutPlanDifficulty, Duration } from '@/utils/enums';
+import { RequestType, ChangeHistory, EnvironmentMaturity, DocumentationOfConfiguration, RequiredEmployees, BackOutPlanDifficulty, Duration } from '@/utils/enums';
 import { cloneDeep, startCase, toLower } from 'lodash';
 import { useChanges } from '@/hooks/query/changes/useChanges';
 
