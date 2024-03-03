@@ -35,7 +35,8 @@ import {
   useUpdateChange,
 } from '@/hooks/query/changes/useChange';
 import UserContext from '@/components/UserContext';
-import { RequestType, ChangeHistory, EnvironmentMaturity, DocumentationOfConfiguration, RequiredEmployees, BackOutPlanDifficulty, Duration } from '@/utils/enums';
+import { UserRole, ChangeStatus } from '@/utils/enums';
+// import { RequestType, ChangeHistory, EnvironmentMaturity, DocumentationOfConfiguration, RequiredEmployees, BackOutPlanDifficulty, Duration } from '@/utils/enums';
 import { cloneDeep, startCase, toLower } from 'lodash';
 import { useChanges } from '@/hooks/query/changes/useChanges';
 
@@ -149,17 +150,6 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
                 <TextField
                   name="serial_number"
                   label="Serial Number *"
-                  control={control}
-                />
-                <SelectField
-                  name="category"
-                  label="Category *"
-                  options={Object.entries(ChangeCategory).map(
-                    ([key, value]) => ({
-                      id: value,
-                      label: startCase(toLower(key)),
-                    }),
-                  )}
                   control={control}
                 />
                 <SelectField
