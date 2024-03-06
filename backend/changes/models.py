@@ -82,10 +82,9 @@ class ChangeRequest(models.Model):
     request_name = models.CharField(max_length=50)
 
     assigned_technician = models.ForeignKey(User, related_name="assigned_technicians", null=True, on_delete=models.SET_NULL)
+
     requested_by = models.ForeignKey(User, related_name="requesters", null=True, on_delete=models.SET_NULL)
 
-    assigned_technician = models.ForeignKey(User, related_name="assigned_technicians", null=True, on_delete=models.SET_NULL)
-    requested_by = models.ForeignKey(User, related_name="requesters", null=True, on_delete=models.SET_NULL)
     request_contact = models.CharField(max_length=50)
     recovery_available = models.BooleanField(default=False)
     redundancy_type = EnumChoiceField(enum_class=RedundancyTypes, default=RedundancyTypes.NONE, blank=True, null=True)

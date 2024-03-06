@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   AutocompleteListbox,
   AutocompleteOption,
@@ -11,13 +12,15 @@ import {
   Stack,
 } from '@mui/joy';
 import ModalTabs from '@/components/layout/ModalTabs';
-import { useForm } from 'react-hook-form';
-import LoadingSpinner from '@/components/layout/LoadingSpinner';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import { useForm } from 'react-hook-form';
+// import LoadingSpinner from '@/components/layout/LoadingSpinner';
+// import { yupResolver } from '@hookform/resolvers/yup';
 //Changes made here to baseschema to fit changes
 import { baseSchema } from '@/utils/formschema/changes';
-import { forwardRef, useContext, useEffect } from 'react';
-import SelectField from '@/components/joy/forms/SelectField';
+
+// import { forwardRef, useContext, useEffect, useState } from 'react';
+
+// import SelectField from '@/components/joy/forms/SelectField';
 import TextareaField from '@/components/joy/forms/TextareaField';
 import AutocompleteField from '@/components/joy/forms/AutocompleteField';
 import RadioGroupField from '@/components/joy/forms/RadioGroupField';
@@ -35,10 +38,19 @@ import {
   useUpdateChange,
 } from '@/hooks/query/changes/useChange';
 import UserContext from '@/components/UserContext';
-import { UserRole, ChangeStatus } from '@/utils/enums';
+import { UserRole, RequestType } from '@/utils/enums';
 // import { RequestType, ChangeHistory, EnvironmentMaturity, DocumentationOfConfiguration, RequiredEmployees, BackOutPlanDifficulty, Duration } from '@/utils/enums';
 import { cloneDeep, startCase, toLower } from 'lodash';
 import { useChanges } from '@/hooks/query/changes/useChanges';
+// import { useUsers } from '@/hooks/query/users/useUsers';
+
+import React, { forwardRef, useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useUsers } from '@/hooks/query/users/useUsers'; // Assuming correct path
+import SelectField from '@/components/joy/forms/SelectField';
+import LoadingSpinner from '@/components/layout/LoadingSpinner';
+
 
 // eslint-disable-next-line react/display-name
 const Listbox = forwardRef((props, ref) => (
@@ -60,6 +72,8 @@ const Listbox = forwardRef((props, ref) => (
   />
 ));
 
+
+
 export default function ChangeForm({ type, color, handleClose, closeTo }) {
   const { user, selectedCourse } = useContext(UserContext);
   const { changeId } = useParams();
@@ -74,6 +88,8 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
   const updateChange = useUpdateChange(changeId, selectedCourse, handleClose);
   const addChange = useAddChange(selectedCourse, handleClose);
 
+  const { status: usersStatus, data: usersData, error: usersError } = useUsers('all');
+
   const {
     handleSubmit,
     control,
@@ -85,6 +101,8 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
     resolver: yupResolver(baseSchema),
   });
 
+
+
   const onSubmit = async (data) => {
     const shapedData = cloneDeep(data);
     if (shapedData.change_dependencies) {
@@ -93,12 +111,16 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
       );
     }
 
+
+
     if (type === 'update') {
       return updateChange.mutateAsync(shapedData);
     } else {
       return addChange.mutateAsync(shapedData);
     }
   };
+
+
 
   useEffect(() => {
     if (!changeData) return;
@@ -127,9 +149,31 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
     options = options.filter((change) => change.id !== changeData.id);
   }
 
+
+
+
   const sortedOptions = options.sort(
     (a, b) => a.category === b.category || a.dateAdded - b.dateAdded,
   );
+
+
+
+  if (usersStatus === 'loading') {
+    return <LoadingSpinner />; // Ensure you have a LoadingSpinner component or use any loading indicator
+  }
+
+  if (usersStatus === 'error') {
+    console.error(usersError);
+    return <div>Error loading users.</div>;
+  }
+
+
+  const userOptions = usersData ? usersData.map(user => ({
+    id: user.id, // Ensure this matches your user object's id field
+    label: `${user.firstName} ${user.lastName}`, // Adapt to match user object's fields
+  })) : [];
+
+
 
   return (
     <>
@@ -140,46 +184,32 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
           style={{ height: '100%' }}
         >
           <ModalTabs errors={errors}>
-            <ModalTabs.Tab label="General">
+            <ModalTabs.Tab label="Change Request Details">
               <Stack spacing={2} sx={{ flexGrow: 1 }}>
-                <TextField
-                  name="change_name"
-                  label="Change Name *"
-                  control={control}
-                />
-                <TextField
-                  name="serial_number"
-                  label="Serial Number *"
-                  control={control}
-                />
                 <SelectField
-                  name="status"
-                  label="Status *"
-                  options={Object.entries(ChangeStatus).map(([key, value]) => ({
+                  name="Change Request Type"
+                  label="Change Request Type *"
+                  options={Object.entries(RequestType).map(([key, value]) => ({
                     id: value,
                     label: startCase(toLower(key)),
                   }))}
                   control={control}
                 />
                 <TextField
-                  name="location"
-                  label="Location *"
+                  name="request_name"
+                  label="Change Request Name *"
                   control={control}
                 />
-                <TextField
-                  name="ip_address"
-                  label="IP Address"
-                  control={control}
+                <SelectField
+                  name="assigned_technician"
+                  label="Assigned Technician *"
+                  options={userOptions}
+                  control={control} // assuming you're using react-hook-form
                 />
-                <TextareaField
-                  name="description"
-                  label="Description"
-                  minRows={3}
-                  control={control}
-                />
+
               </Stack>
             </ModalTabs.Tab>
-            <ModalTabs.Tab label="License">
+            <ModalTabs.Tab label="Risk Assessment">
               <Stack spacing={2} sx={{ flexGrow: 1 }}>
                 <TextField
                   name="vendor_name"
