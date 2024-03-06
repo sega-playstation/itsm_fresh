@@ -85,10 +85,19 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
     selectedCourse,
     type === 'update',
   );
+
+  const { status: usersStatus, data: usersData, error: usersError } = useUsers('all');
+  console.log(usersData);
+
+  // const userOptions = usersData ? usersData.map(user => ({
+  //   id: user.id,
+  //   label: `${user.first_name} ${user.last_name}`,
+  // })) : [];
+
   const updateChange = useUpdateChange(changeId, selectedCourse, handleClose);
   const addChange = useAddChange(selectedCourse, handleClose);
 
-  const { status: usersStatus, data: usersData, error: usersError } = useUsers('all');
+
 
   const {
     handleSubmit,
@@ -100,7 +109,6 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
     mode: 'onBlur',
     resolver: yupResolver(baseSchema),
   });
-
 
 
   const onSubmit = async (data) => {
@@ -169,9 +177,10 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
 
 
   const userOptions = usersData ? usersData.map(user => ({
-    id: user.id, // Ensure this matches your user object's id field
-    label: `${user.firstName} ${user.lastName}`, // Adapt to match user object's fields
+    id: user.id,
+    label: `${user.first_name} ${user.last_name}`, // Use the correct property names
   })) : [];
+
 
 
 
@@ -206,7 +215,17 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
                   options={userOptions}
                   control={control} // assuming you're using react-hook-form
                 />
-
+                <SelectField
+                  name="requested_by"
+                  label="Requested By *"
+                  options={userOptions}
+                  control={control} // assuming you're using react-hook-form
+                />
+                <TextField
+                  name="request_contact"
+                  label="Request Contact"
+                  control={control}
+                />
               </Stack>
             </ModalTabs.Tab>
             <ModalTabs.Tab label="Risk Assessment">
