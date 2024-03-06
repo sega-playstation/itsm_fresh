@@ -271,43 +271,7 @@ export default function ChangeForm({ type, color, handleClose, closeTo }) {
                   control={control}
                 />
               </Stack>
-            </ModalTabs.Tab>
-            <ModalTabs.Tab label="Dependencies">
-              <AutocompleteField
-                name="change_dependencies"
-                label="Changes"
-                startDecorator={<SearchIcon />}
-                placeholder="Filter Changes"
-                noOptionsText="No changes"
-                open
-                multiple
-                slots={{ listbox: Listbox }}
-                options={sortedOptions}
-                getOptionLabel={(option) => option.change_name}
-                groupBy={(option) => option.category}
-                renderTags={() => null}
-                renderOption={(props, option, { selected }) => (
-                  <AutocompleteOption {...props}>
-                    <ListItemDecorator>
-                      {selected ? (
-                        <CheckBoxIcon />
-                      ) : (
-                        <CheckBoxOutlineBlankIcon />
-                      )}
-                    </ListItemDecorator>
-                    <ListItemContent sx={{ fontSize: 'sm' }}>
-                      {option.change_name}
-                    </ListItemContent>
-                  </AutocompleteOption>
-                )}
-                forcePopupIcon={false}
-                control={control}
-                sx={{
-                  '& .MuiAutocomplete-wrapper': {
-                    '--Autocomplete-wrapperGap': 0,
-                  },
-                }}
-              />
+
             </ModalTabs.Tab>
           </ModalTabs>
         </form>
